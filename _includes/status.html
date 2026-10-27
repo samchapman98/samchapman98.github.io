@@ -1,0 +1,7 @@
+{%- assign s = include.status | default: "sketch" | downcase -%}
+{%- case s -%}
+  {%- when "considered" -%}{%- assign label = "Considered" -%}
+  {%- when "draft" -%}{%- assign label = "Draft" -%}
+  {%- else -%}{%- assign s = "sketch" -%}{%- assign label = "Sketch" -%}
+{%- endcase -%}
+<span class="status status--{{ s }}"><span class="ripeness" aria-hidden="true"></span>{% unless include.glyph_only %}<span class="status__label">{{ label }}</span>{% else %}<span class="visually-hidden">{{ label }}</span>{% endunless %}</span>

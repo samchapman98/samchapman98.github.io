@@ -1,0 +1,42 @@
+---
+layout: default
+---
+<section class="intro">
+  <p class="intro__line">{{ site.description }}</p>
+  <p class="intro__aside">Most of this is unfinished. That's on purpose: I'd rather think in public than wait until I'm sure.</p>
+</section>
+
+<section class="key" aria-labelledby="key-title">
+  <h2 id="key-title" class="visually-hidden">How finished each piece is</h2>
+  <dl class="key__list">
+    <div class="key__item">
+      <dt>{% include status.html status="sketch" %}</dt>
+      <dd>Thinking out loud</dd>
+    </div>
+    <div class="key__item">
+      <dt>{% include status.html status="draft" %}</dt>
+      <dd>Getting somewhere</dd>
+    </div>
+    <div class="key__item">
+      <dt>{% include status.html status="considered" %}</dt>
+      <dd>I'd defend this</dd>
+    </div>
+  </dl>
+</section>
+
+<section class="writing" aria-labelledby="writing-title">
+  <h2 id="writing-title" class="visually-hidden">Writing</h2>
+  {%- if site.posts.size > 0 %}
+  <ol class="post-list" reversed>
+    {%- for post in site.posts %}
+    <li class="post-list__item">
+      {% include status.html status=post.status glyph_only=true %}
+      <a class="post-list__title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <time class="post-list__date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%-d %b %Y" }}</time>
+    </li>
+    {%- endfor %}
+  </ol>
+  {%- else %}
+  <p class="empty">Nothing here yet. The first piece is on its way.</p>
+  {%- endif %}
+</section>

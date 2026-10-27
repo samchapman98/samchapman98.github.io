@@ -1,0 +1,33 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">
+      {% include status.html status=page.status %}
+      <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%-d %B %Y" }}</time>
+    </p>
+    {%- if page.note and page.note != "" %}
+    <p class="post-note">{{ page.note }}</p>
+    {%- endif %}
+  </header>
+  <div class="prose">
+{{ content }}
+  </div>
+  {%- if page.tags and page.tags.size > 0 %}
+  <footer class="post-footer">
+    <p class="post-tags">Filed under
+      {% for tag in page.tags %}<a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}
+    </p>
+  </footer>
+  {%- endif %}
+</article>
+<nav class="post-nav" aria-label="More writing">
+  {%- if page.previous %}
+  <a class="post-nav__link" href="{{ page.previous.url | relative_url }}"><span class="post-nav__dir">Older</span>{{ page.previous.title }}</a>
+  {%- endif %}
+  {%- if page.next %}
+  <a class="post-nav__link post-nav__link--next" href="{{ page.next.url | relative_url }}"><span class="post-nav__dir">Newer</span>{{ page.next.title }}</a>
+  {%- endif %}
+</nav>

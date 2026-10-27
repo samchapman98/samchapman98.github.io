@@ -1,0 +1,66 @@
+# Settings for Pages CMS (app.pagescms.org), the editor for writing posts from a phone or browser.
+media:
+  input: assets/images
+  output: /assets/images
+
+content:
+  - name: posts
+    label: Writing
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      primary: title
+      sort: date
+      order: desc
+      fields: [title, status, date, published]
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: status
+        label: How finished is it?
+        type: select
+        default: sketch
+        options:
+          values:
+            - name: sketch
+              label: Sketch (thinking out loud)
+            - name: draft
+              label: Draft (getting somewhere)
+            - name: considered
+              label: Considered (I'd defend this)
+      - name: note
+        label: Note at the top (optional)
+        description: A line shown under the title, like "Written in 20 minutes, probably wrong."
+        type: string
+      - name: tags
+        label: Topics
+        description: One topic per box, e.g. s-risk, cluelessness, ethics.
+        type: string
+        list: true
+      - name: published
+        label: Show on the site
+        description: Turn off to keep this as a private draft. It stays saved but won't appear on the site.
+        type: boolean
+        default: true
+      - name: body
+        label: Writing
+        type: rich-text
+
+  - name: about
+    label: About page
+    type: file
+    path: about/index.md
+    fields:
+      - name: title
+        label: Title
+        type: string
+      - name: body
+        label: About
+        type: rich-text
